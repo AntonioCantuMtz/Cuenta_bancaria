@@ -1,7 +1,11 @@
-print("Hola :3")
+#Proyecto - Cuenta Bancaria
 
+class Persona:
 
+    def __init__(self, nombre, apellido):
+        self.nombre = nombre
+        self.apellido = apellido
 
-
+    
 
 
