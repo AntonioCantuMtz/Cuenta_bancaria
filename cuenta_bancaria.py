@@ -14,6 +14,11 @@ class Cliente(Persona):
         self.numero_cuenta = numero_cuenta
         self.balance = balance
 
+    def __str__(self):
+        return f"Bienvenido(a) {self.nombre} {self.apellidos}\nSu número de cuenta es: {self.numero_cuenta}\nSu saldo es: {self.balance}"
+
+    
+
 
 
 
