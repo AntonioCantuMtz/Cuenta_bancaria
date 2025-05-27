@@ -1,4 +1,5 @@
 #Proyecto - Cuenta Bancaria
+from random import randint
 
 class Persona:
 
@@ -15,7 +16,7 @@ class Cliente(Persona):
         self.balance = balance
 
     def __str__(self):
-        return f"Bienvenido(a) {self.nombre} {self.apellidos}\nSu número de cuenta es: {self.numero_cuenta}\nSu saldo es: {self.balance}"
+        return f"Bienvenido(a) {self.nombre} {self.apellidos}\nSu número de cuenta es: {self.numero_cuenta}\nSu saldo es: ${self.balance} MXN"
 
 
 #Funciones
@@ -28,7 +29,6 @@ def inicio():
         nombre,apellido = datos_ingresados()
         validacion,nombre_validado,apellido_validado = validar_datos(nombre, apellido)
         nuevo_cliente(validacion, nombre_validado, apellido_validado)
-
 
 
 def datos_ingresados():
@@ -53,13 +53,21 @@ def validar_datos(validar_nombre, validar_apellidos):
 
 
 def nuevo_cliente(validacion, nombre, apellidos):
+
+    numero_de_cuenta = generar_numero_cuenta()
+
     if validacion is True:
-        cliente_nuevo = Cliente()
-        return
+        cliente = Cliente(numero_de_cuenta, 0, nombre, apellidos)
+        return cliente
     else:
         return "ERROR. El nombre ingresado o su apellido no es válido, favor de ingresar sus datos nuevamente."
 
+#Esta funcion genera el numero de la cuenta bancaria :p
+def generar_numero_cuenta():
 
+    numero_cuenta_bancaria = randint(1000000000000000, 9999999999999999)
+
+    return numero_cuenta_bancaria
 
 
 
