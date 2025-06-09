@@ -16,28 +16,46 @@ class Cliente(Persona):
         self.balance = balance
 
     def __str__(self):
-        return f"¡Bienvenido(a) {self.nombre} {self.apellido}!\nSu número de cuenta es: {self.numero_cuenta}\nSu saldo es: ${self.balance} MXN"
+        return f"¡Bienvenido(a) {self.nombre} {self.apellido}!\nSu número de cuenta es: {self.numero_cuenta}\nSu saldo es: ${self.balance} MXN\n"
 
     def deposito(self, operacion_deposito):
         self.balance = self.balance + operacion_deposito
-        return f"Su balance es: ${self.balance} MXN"
+        return print(f"Su balance es: ${self.balance} MXN")
 
     def retiro(self, operacion_retiro):
-        if self.balance >= 0:
-            return "La cantidad que deseas retirar sobrepasa tu balance. Intenta con otra cantidad."
+        if self.balance < operacion_retiro or self.balance == 0:
+            return print("La cantidad que deseas retirar sobrepasa tu balance. Intenta con otra cantidad.")
         else:
             self.balance = self.balance - operacion_retiro
-            return f"Su balance es: ${self.balance} MXN"
+            return print(f"Su balance es: ${self.balance} MXN")
 
 
 #Funciones
 def inicio():
     print("¡Bienvenido(a) a tu cuenta bancaria! \nInicia tu registro para poder acceder a tu balance.")
-    nombre,apellido = datos_ingresados()
+    nombre, apellido = datos_ingresados()
     validacion, nombre_validado, apellido_validado = validar_datos(nombre, apellido)
     cliente_nuevo = nuevo_cliente(validacion, nombre_validado, apellido_validado)
-    #Aqui se limpia la pantalla
+    opcion = 0
+    while opcion != 3:
+        # Aqui se limpia la pantalla
+        print(cliente_nuevo.__str__())
+        print("Ingrese la operación que desea hacer:\n1.- Depositar dinero\n2.- Retirar dinero\n3.- Salir")
+        opcion = int(input())
+        if opcion == 1:
+            print("Ingresa la cantidad que deseas depositar: ")
+            deposito = int(input())
+            cliente_nuevo.deposito(deposito)
+        elif opcion == 2:
+            print("Ingresa la cantidad que deseas retirar: ")
+            retiro = int(input())
+            cliente_nuevo.retiro(retiro)
+        elif opcion == 3:
+            pass
+        else:
+            print("ERROR. Esa opción no existe. Favor de ingresar una opción valida.\n")
 
+    return print("Gracias por usar nuestro sistema bancario. ¡Que tenga un excelente día!")
 
 
 
@@ -81,8 +99,4 @@ def generar_numero_cuenta():
 
 #Iniciamos el programa
 inicio()
-
-
-
-
 
