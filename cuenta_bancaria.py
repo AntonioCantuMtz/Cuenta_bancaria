@@ -1,5 +1,6 @@
 #Proyecto - Cuenta Bancaria
 from random import randint
+from os import system
 
 class Persona:
 
@@ -16,7 +17,7 @@ class Cliente(Persona):
         self.balance = balance
 
     def __str__(self):
-        return f"¡Bienvenido(a) {self.nombre} {self.apellido}!\nSu número de cuenta es: {self.numero_cuenta}\nSu saldo es: ${self.balance} MXN\n"
+        return f"¡Hola {self.nombre} {self.apellido}!\nSu número de cuenta es: {self.numero_cuenta}\nSu saldo es: ${self.balance} MXN\n"
 
     def deposito(self, operacion_deposito):
         self.balance = self.balance + operacion_deposito
@@ -29,26 +30,28 @@ class Cliente(Persona):
             self.balance = self.balance - operacion_retiro
             return print(f"Su balance es: ${self.balance} MXN")
 
-
 #Funciones
 def inicio():
     print("¡Bienvenido(a) a tu cuenta bancaria! \nInicia tu registro para poder acceder a tu balance.")
     nombre, apellido = datos_ingresados()
     validacion, nombre_validado, apellido_validado = validar_datos(nombre, apellido)
     cliente_nuevo = nuevo_cliente(validacion, nombre_validado, apellido_validado)
+    system("cls")
     opcion = 0
     while opcion != 3:
-        # Aqui se limpia la pantalla
         print(cliente_nuevo.__str__())
         print("Ingrese la operación que desea hacer:\n1.- Depositar dinero\n2.- Retirar dinero\n3.- Salir")
         opcion = int(input())
+        system("cls")
         if opcion == 1:
             print("Ingresa la cantidad que deseas depositar: ")
             deposito = int(input())
+            system("cls")
             cliente_nuevo.deposito(deposito)
         elif opcion == 2:
             print("Ingresa la cantidad que deseas retirar: ")
             retiro = int(input())
+            system("cls")
             cliente_nuevo.retiro(retiro)
         elif opcion == 3:
             pass
@@ -56,7 +59,6 @@ def inicio():
             print("ERROR. Esa opción no existe. Favor de ingresar una opción valida.\n")
 
     return print("Gracias por usar nuestro sistema bancario. ¡Que tenga un excelente día!")
-
 
 
 def datos_ingresados():
