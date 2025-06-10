@@ -17,7 +17,7 @@ class Cliente(Persona):
         self.balance = balance
 
     def __str__(self):
-        return f"¡Hola {self.nombre} {self.apellido}!\nSu número de cuenta es: {self.numero_cuenta}\nSu saldo es: ${self.balance} MXN\n"
+        return f"¡Hola {self.nombre} {self.apellido}! \U0001FAAA \nSu número de cuenta es: {self.numero_cuenta} \U0001F4B3 \nSu balance es: ${self.balance} MXN \U0001F4B5 \n"
 
     def deposito(self, operacion_deposito):
         self.balance = self.balance + operacion_deposito
@@ -32,11 +32,16 @@ class Cliente(Persona):
 
 #Funciones
 def inicio():
-    print("¡Bienvenido(a) a tu cuenta bancaria! \nInicia tu registro para poder acceder a tu balance.")
+    print("\U0001F3E6 ¡Bienvenido(a) a tu cuenta bancaria! \U0001F3E7 \nInicia tu registro para poder acceder a tu balance.")
     nombre, apellido = datos_ingresados()
     validacion, nombre_validado, apellido_validado = validar_datos(nombre, apellido)
+
+    if validacion is False:
+        return print("Ha ocurrido un error. \U0000274C \nFavor de volver a ingresar sus datos. \U0001F615")
+
     cliente_nuevo = nuevo_cliente(validacion, nombre_validado, apellido_validado)
     system("cls")
+
     opcion = 0
     while opcion != 3:
         print(cliente_nuevo.__str__())
@@ -56,9 +61,9 @@ def inicio():
         elif opcion == 3:
             pass
         else:
-            print("ERROR. Esa opción no existe. Favor de ingresar una opción valida.\n")
+            print("ERROR \U0000274C Esa opción no existe. Favor de ingresar una opción valida.\n")
 
-    return print("Gracias por usar nuestro sistema bancario. ¡Que tenga un excelente día!")
+    return print("Gracias por usar nuestro sistema bancario. ¡Que tenga un excelente día! \U0001F607 \n\U0001F47A Elaborado por Anton Mtz. \U0001F30A")
 
 
 def datos_ingresados():
@@ -90,7 +95,7 @@ def nuevo_cliente(validacion, nombre, apellido):
         cliente_nuevo = Cliente(numero_de_cuenta, 0, nombre, apellido)
         return cliente_nuevo
     else:
-        return "ERROR. El nombre ingresado o su apellido no es válido, favor de ingresar sus datos nuevamente."
+        return print("ERROR \U0000274C El nombre ingresado o su apellido no es válido, favor de ingresar sus datos nuevamente.")
 
 #Esta funcion genera el numero de la cuenta bancaria
 def generar_numero_cuenta():
